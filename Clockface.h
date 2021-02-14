@@ -11,11 +11,13 @@
 #include <Game.h>
 #include <Object.h>
 #include <ImageUtils.h>
+// Commons
+#include <IClockface.h>
+#include <DateTime.h>
+
 #include "gfx/assets.h"
 #include "gfx/mario.h"
 #include "gfx/block.h"
-#include "../common/IClockface.h"
-#include "../common/DateTime.h"
 
 
 class Clockface: public IClockface {
