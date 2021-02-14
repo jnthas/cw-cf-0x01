@@ -1,5 +1,11 @@
 #include <Arduino.h>
-#include <gfxfont.h>
+
+#ifdef ARDUINO_ESP32_DEV
+  #include <gfxfont.h>
+#else
+  #include <M5Stack.h>
+#endif
+
 
 const uint8_t Super_Mario_Bros__24pt7bBitmaps[] PROGMEM = {
   0x00, 0xFF, 0xEC, 0x30, 0xDE, 0xF6, 0x6C, 0xDB, 0xFB, 0x6F, 0xED, 0x9B,
