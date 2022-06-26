@@ -1,5 +1,4 @@
-#ifndef BlockSprite_h
-#define BlockSprite_h
+#pragma once
 
 #include <Arduino.h>
 #include <Game.h>
@@ -40,6 +39,3 @@ class Block: public Sprite, public EventTask {
     void execute(EventType event, Sprite* caller);
 
 };
-
-
-#endif

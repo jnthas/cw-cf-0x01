@@ -1,11 +1,10 @@
-#ifndef MarioClockface_h
-#define MarioClockface_h
+#pragma once
 
 #include <Arduino.h>
 
 #include "gfx/Super_Mario_Bros__24pt7b.h"
 
-#include <Display.h>
+#include <Adafruit_GFX.h>
 #include <Tile.h>
 #include <Locator.h>
 #include <Game.h>
@@ -13,23 +12,22 @@
 #include <ImageUtils.h>
 // Commons
 #include <IClockface.h>
-#include <DateTime.h>
+#include <CWDateTime.h>
 
 #include "gfx/assets.h"
 #include "gfx/mario.h"
 #include "gfx/block.h"
 
-
 class Clockface: public IClockface {
   private:
-    Display* _display;
-    DateTime* _dateTime;
+    Adafruit_GFX* _display;
+    CWDateTime* _dateTime;
     void updateTime();
 
   public:
-    Clockface(Display* display);
-    void setup(DateTime *dateTime);
+    Clockface(Adafruit_GFX* display);
+    void setup(CWDateTime *dateTime);
     void update();
-};
+    void externalEvent(int type);
 
-#endif
+};

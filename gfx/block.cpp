@@ -12,7 +12,7 @@ Block::Block(int x, int y) {
 
 void Block::idle() {
   if (_state != IDLE) {
-    Serial.println("Block - Idle - Start");
+    // Serial.println("Block - Idle - Start");
 
     _lastState = _state;
     _state = IDLE;
@@ -23,7 +23,7 @@ void Block::idle() {
 
 void Block::hit() {
   if (_state != HIT) {
-    Serial.println("Hit - Start");
+    // Serial.println("Hit - Start");
 
     _lastState = _state;
     _state = HIT;
@@ -34,7 +34,6 @@ void Block::hit() {
   }
 }
 
-
 void Block::setTextBlock() {
   Locator::getDisplay()->setTextColor(0x0000);       
   
@@ -44,7 +43,6 @@ void Block::setTextBlock() {
   }  else {
     Locator::getDisplay()->setCursor(_x+2, _y+12);
   }
-  
 
   Locator::getDisplay()->print(_text);
 }
@@ -55,14 +53,14 @@ void Block::setText(String text) {
 
 void Block::init() {
   Locator::getEventBus()->subscribe(this);
-  Locator::getDisplay()->draw(BLOCK, _x, _y, _width, _height);
+  Locator::getDisplay()->drawRGBBitmap(_x, _y, BLOCK, _width, _height);
   setTextBlock();  
 }
 
 void Block::update() {
 
   if (_state == IDLE && _lastState != _state) {
-    Locator::getDisplay()->draw(BLOCK, _x, _y, _width, _height);
+    Locator::getDisplay()->drawRGBBitmap(_x, _y, BLOCK, _width, _height);
 
     setTextBlock();
 
@@ -72,18 +70,18 @@ void Block::update() {
     
     if (millis() - lastMillis >= 60) {
 
-      Serial.print("BLOCK Y = ");
-      Serial.println(_y);
+      // Serial.print("BLOCK Y = ");
+      // Serial.println(_y);
       
       Locator::getDisplay()->fillRect(_x, _y, _width, _height, SKY_COLOR);
       
       _y = _y + (MOVE_PACE * (direction == UP ? -1 : 1));
  
-      Locator::getDisplay()->draw(BLOCK, _x, _y, _width, _height);
+      Locator::getDisplay()->drawRGBBitmap(_x, _y, BLOCK, _width, _height);
       setTextBlock();
                  
       if (floor(_firstY - _y) >= MAX_MOVE_HEIGHT) {
-        Serial.println("DOWN");
+        // Serial.println("DOWN");
         direction = DOWN;
       }
 

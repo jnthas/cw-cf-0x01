@@ -1,5 +1,4 @@
-#ifndef Mario_h
-#define Mario_h
+#pragma once
 
 #include <Arduino.h>
 #include <Game.h>
@@ -44,6 +43,3 @@ class Mario: public Sprite, public EventTask {
     void execute(EventType event, Sprite* caller);
     
 };
-
-
-#endif

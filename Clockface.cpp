@@ -5,8 +5,7 @@ EventBus eventBus;
 
 const char* FORMAT_TWO_DIGITS = "%02d";
 
-
-// Graphical
+// Graphical elements
 Tile ground(GROUND, 8, 8); 
 
 Object bush(BUSH, 21, 9);
@@ -19,18 +18,16 @@ Mario mario(23, 40);
 Block hourBlock(13, 8);
 Block minuteBlock(32, 8);
 
-
 unsigned long lastMillis = 0;
 
-
-Clockface::Clockface(Display* display) {
+Clockface::Clockface(Adafruit_GFX* display) {
   _display = display;
 
   Locator::provide(display);
   Locator::provide(&eventBus);
 }
 
-void Clockface::setup(DateTime *dateTime) {
+void Clockface::setup(CWDateTime *dateTime) {
   _dateTime = dateTime;
 
   Locator::getDisplay()->setFont(&Super_Mario_Bros__24pt7b);
@@ -61,11 +58,18 @@ void Clockface::update() {
     updateTime();
     lastMillis = millis();
 
-    Serial.println(_dateTime->getFormattedTime());
+    //Serial.println(_dateTime->getFormattedTime());
   }
 }
 
 void Clockface::updateTime() {
   hourBlock.setText(String(_dateTime->getHour()));
   minuteBlock.setText(String(_dateTime->getMinute(FORMAT_TWO_DIGITS)));
+}
+
+void Clockface::externalEvent(int type) {
+  if (type == 0) {  //TODO create an enum
+    mario.jump();
+    updateTime();
+  }
 }
